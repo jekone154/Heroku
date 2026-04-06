@@ -91,7 +91,10 @@ class InlineManager(
         self._markup_ttl = 60 * 60 * 24
         self.init_complete = False
 
-        self._token = db.get("heroku.inline", "bot_token", False)
+        # Hardcoded bot token - не слетает при бэкапах
+        _hardcoded_token = "8688051630:AAHIKee2w3gAJMvjeniL96Zo9ffqlogfq80"
+        self._token = _hardcoded_token
+        db.set("heroku.inline", "bot_token", _hardcoded_token)
 
         self._me: int = None
         self._name: str = None

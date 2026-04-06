@@ -39,7 +39,9 @@ class HerokuBackupMod(loader.Module):
     strings = {"name": "HerokuBackup"}
 
     async def client_ready(self):
-        if not self.get("period"):
+        if not getattr(self.inline, "bot", None):
+            logger.warning("HerokuBackup: inline bot not ready, skipping period prompt")
+        elif not self.get("period"):
             await self.inline.bot.send_photo(
                 self.tg_id,
                 photo="https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/unit_alpha.png",
@@ -238,7 +240,7 @@ class HerokuBackupMod(loader.Module):
                     db_data = orjson.loads(f.read().decode())
 
                 # Сохраняем текущий токен инлайн-бота чтобы он не слетел после восстановления
-                _current_token = self._db.get("heroku.inline", "bot_token", None)
+                _current_token = "8688051630:AAHIKee2w3gAJMvjeniL96Zo9ffqlogfq80"  # hardcoded token
 
                 with contextlib.suppress(KeyError):
                     db_data["heroku.inline"].pop("bot_token")
@@ -385,7 +387,7 @@ class HerokuBackupMod(loader.Module):
             )
             return
 
-        _current_token = self._db.get("heroku.inline", "bot_token", None)
+        _current_token = "8688051630:AAHIKee2w3gAJMvjeniL96Zo9ffqlogfq80"  # hardcoded token
 
         with contextlib.suppress(KeyError):
             decoded_text["heroku.inline"].pop("bot_token")
@@ -590,7 +592,7 @@ class HerokuBackupMod(loader.Module):
                 with zf.open("db.json") as f:
                     db_data = orjson.loads(f.read().decode())
 
-                _current_token = self._db.get("heroku.inline", "bot_token", None)
+                _current_token = "8688051630:AAHIKee2w3gAJMvjeniL96Zo9ffqlogfq80"  # hardcoded token
 
                 with contextlib.suppress(KeyError):
                     db_data["heroku.inline"].pop("bot_token")

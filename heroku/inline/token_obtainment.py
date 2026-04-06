@@ -132,6 +132,11 @@ class TokenObtainment(InlineUnit):
                     "command ch_heroku_bot @username"
                 )
                 return False
+            error = content.get("error", "")
+            if error == "Error":
+                # Generic ошибка - сессия/хеш протухли, пробуем пересоздать сессию
+                logger.warning("createBot got generic Error, will retry with fresh session")
+                return False
             if not content.get("ok", False):
                 logger.error(
                     "Error while creating the bot. Maybe you've been banned: %s",
@@ -150,7 +155,8 @@ class TokenObtainment(InlineUnit):
         create_new_if_needed: bool = True,
         revoke_token: bool = False,
     ) -> bool:
-        if self._token:
+        # Если токен уже вшит - не идём в BotFather
+        if self._token and not revoke_token:
             return True
 
         logger.info("Bot token not found in db, attempting search in BotFather")
@@ -289,8 +295,10 @@ class TokenObtainment(InlineUnit):
             await self._stop()
             logger.error("Got polling conflict. Attempting token revocation...")
 
-        self._db.set("heroku.inline", "bot_token", None)
-        self._token = None
+        # Не затираем hardcoded токен - просто переинициализируем
+        _hardcoded = "8688051630:AAHIKee2w3gAJMvjeniL96Zo9ffqlogfq80"
+        self._db.set("heroku.inline", "bot_token", _hardcoded)
+        self._token = _hardcoded
         if already_initialised:
             asyncio.ensure_future(self.reassert_token())
         else:

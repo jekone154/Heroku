@@ -127,6 +127,9 @@ class Presets(loader.Module):
         await self._menu()
 
     async def _menu(self):
+        if not getattr(self.inline, "bot", None):
+            logger.warning("Presets: inline bot not ready, skipping menu")
+            return
         await self.inline.bot.send_photo(
             self._client.tg_id,
             "https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/presets_cmd.png",

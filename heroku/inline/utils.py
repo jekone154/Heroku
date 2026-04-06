@@ -902,7 +902,21 @@ class Utils(InlineUnit):
                         revoke_token=revoke_token,
                     )
                 case 2:
-                    return await self._create_bot(session, main_url, _hash)
+                    # Retry createBot до 3 раз если generic Error
+                    for _attempt in range(3):
+                        result2 = await self._create_bot(session, main_url, _hash)
+                        if result2 is not False:
+                            return result2
+                        if _attempt < 2:
+                            logger.warning("createBot failed, retrying in 5s... (%d/3)", _attempt + 1)
+                            await session.close()
+                            await asyncio.sleep(5)
+                            try:
+                                session, _hash = await self._get_webapp_session(url)
+                                main_url = url.split("?")[0]
+                            except Exception:
+                                break
+                    return False
                 case 3:
                     return await self._dp_revoke_token(
                         session,

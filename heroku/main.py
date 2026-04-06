@@ -977,7 +977,18 @@ class Heroku:
                     "Session %s was terminated and re-auth is required",
                     session.filename,
                 )
+                # Удаляем битую сессию чтобы при следующем запуске не было дублей
+                Path(session.filename).unlink(missing_ok=True)
                 self.sessions.remove(session)
+            except Exception as e:
+                err = str(e).lower()
+                if any(x in err for x in ("auth_key", "session_revoked", "user_deactivated", "session_expired")):
+                    logging.error("Session %s is invalid (%s), deleting", session.filename, e)
+                    Path(session.filename).unlink(missing_ok=True)
+                    self.sessions.remove(session)
+                else:
+                    logging.exception("Unexpected error loading session %s", session.filename)
+                    continue
 
         return bool(self.sessions)
 
