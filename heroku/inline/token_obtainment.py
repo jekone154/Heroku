@@ -77,11 +77,16 @@ class TokenObtainment(InlineUnit):
             return False
 
         try:
+            # __file__ = heroku/inline/token_obtainment.py
+            # нужно подняться на 3 уровня: inline -> heroku -> Heroku (корень)
             _assets_path = os.path.join(
-                os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
                 "assets",
                 "heroku.png",
             )
+            if not os.path.exists(_assets_path):
+                logger.warning("heroku.png not found at %s, skipping avatar", _assets_path)
+                raise RuntimeError("No avatar file")
             form = aiohttp.FormData()
             form.add_field(
                 "file",
@@ -99,9 +104,9 @@ class TokenObtainment(InlineUnit):
                         "Error while uploading bot userpic: resp%s", resp.status
                     )
                     raise RuntimeError("Upload failed")
-                content = await resp.json()
-                photo_id = content["media"]["photo_id"]
-        except (RuntimeError, KeyError):
+                resp_data = await resp.json()
+                photo_id = resp_data["media"]["photo_id"]
+        except (RuntimeError, KeyError, FileNotFoundError, OSError):
             photo_id = ""
 
         data = {
