@@ -1505,6 +1505,14 @@ class Modules:
     async def send_ready(self):
         """Send all data to all modules"""
         await self.inline.register_manager()
+        # Ждём пока inline.bot точно будет готов перед запуском client_ready модулей
+        if not getattr(self.inline, "bot", None):
+            for _ in range(30):
+                await asyncio.sleep(1)
+                if getattr(self.inline, "bot", None):
+                    break
+            else:
+                logger.warning("Inline bot did not initialize in 30s, continuing anyway")
         await asyncio.gather(
             *[self.send_ready_one_wrapper(mod) for mod in self.modules]
         )

@@ -559,31 +559,34 @@ class UpdaterMod(loader.Module):
             self.set("do_not_create", True)
 
         if not self.config["autoupdate"] and not self.get("autoupdate", False):
-            await self.inline.bot.send_photo(
-                self.tg_id,
-                photo="https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/unit_alpha.png",
-                caption=self.strings("autoupdate"),
-                reply_markup=self.inline.generate_markup(
-                    [
+            if not getattr(self.inline, "bot", None):
+                logger.warning("Updater: inline bot not ready, skipping autoupdate prompt")
+            else:
+                await self.inline.bot.send_photo(
+                    self.tg_id,
+                    photo="https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/unit_alpha.png",
+                    caption=self.strings("autoupdate"),
+                    reply_markup=self.inline.generate_markup(
                         [
-                            {
-                                "text": f"✅ Turn on",
-                                "callback": self._set_autoupdate_state,
-                                "args": (True,),
-                                "style": "success",
-                            }
-                        ],
-                        [
-                            {
-                                "text": "🚫 Turn off",
-                                "callback": self._set_autoupdate_state,
-                                "args": (False,),
-                                "style": "danger",
-                            }
-                        ],
-                    ]
-                ),
-            )
+                            [
+                                {
+                                    "text": f"✅ Turn on",
+                                    "callback": self._set_autoupdate_state,
+                                    "args": (True,),
+                                    "style": "success",
+                                }
+                            ],
+                            [
+                                {
+                                    "text": "🚫 Turn off",
+                                    "callback": self._set_autoupdate_state,
+                                    "args": (False,),
+                                    "style": "danger",
+                                }
+                            ],
+                        ]
+                    ),
+                )
 
     async def _add_folder(self):
         folders = await self._client(GetDialogFiltersRequest())

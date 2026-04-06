@@ -185,6 +185,9 @@ class Quickstart(loader.Module):
         if self.get("no_msg"):
             return
 
+        if not getattr(self.inline, "bot", None):
+            logger.warning("Quickstart: inline bot not ready, skipping welcome message")
+            return
         try:
             await self.inline.bot.send_message(
                 self._client.tg_id,
