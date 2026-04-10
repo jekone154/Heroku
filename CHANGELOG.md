@@ -1,267 +1,12 @@
-# Heroku Changelog
-## 🪐 Heroku 2.0.0
-- rework utils
-- add prefix to start message
-- fix create bot
-- remove debugger
-- improve error message
-- add protection in terminal
-- add media_quote, invert_media to help, ping and info cmds
-- remove "heroku" from bot username
-- fix asset channel
-- add entity validation for setprefix
-- update readme
-- add utils.get_platform_named_emoji
-- add multiload
-- fix error in help lib
-- add config to internet error ignore
-- update heroku-tl to 2.0.0
-- add time execution to eval and terminal
-- add type annotations (developer oriented)
-- add japanese language
-- add french language
-- add protection for messages from 777000 and 489000
-- add help -c (core modules) and help -l (loaded modules)
-- new info
-- fix folders
-- rework bot creation
-- add python version in info
-- remove -S flag from sudo
-- add link validator to help, info, ping
-- add meme lang packs
-- add UwU language to meme pack
-- add leet(1337) to meme pack
-- add tiktokkid to meme pack
-- remove support python 3.9
-- rework if else to match/case
-- add utils.format_file_size
-- add utils.is_url
-- add utils.get_iso_time
-- add utils.safe_getattr
-- add utils.get_last_commit_message
-- add utils.get_commit_count
-- add utils.get_hostname
-- add utils.resolve_domain
-- add utils.is_port_open
-- add utils.get_network_interfaces
-- add utils.get_disk_usage
-- add utils.get_ip_address
-- add utils.get_args_bool
-- add utils.get_args_int
-- fix pack_url
-- add togglecmd cmd for disable or enable any cmd
-- add togglemod cmd for disable or enable any module
-- add clearmodule cmd
-- add placeholder system
-- move all log chat to forumTopics
-- add execution in .e from reply
-- add utils.asset_forum_topic
-- add utils.create_topic
-- add operator to fcfg
-- remove invokecmd
-- remove uninstall_herokucmd
-- remove debugmodcmd
-- add new validator RandomLink
-- replace validators in help, herokuinfo, tester to RandomLink
-- add and remove some modules in presets
-- replace TgCrypto to TgCrypto-pyrofork
-- impove keyboard layout
-- refactor clean up socket path assignment handling
-- improve platform model detection
-- add blockquote to dlm and lm cmds
-- improve boolean validation
-- add requirements installation when launching the userbot
-- add mini protection in eval
-- fix database path
-- fconfig value from reply
-- migrate from json to orjson
-- backupall send backup in backupchat
-- fully remove save to fs
-- optimize username handling & fix logic
-- protection for session files
-- add premium emoji in some cases with inline
-- add developer in help
-- add folder for config
-- remove pyproject.toml
-- add more session protection
-- add custom presets
-- add message about no query answer
-- add ulm -f
-- fix permission denied in info 
-- add hiding the phone in htl
-- add more protection for official telegram account (777000)
-- add button styles support for aiogram 3.25.0+ (danger, primary, success)
-- add premium emoji support in buttons via icon_custom_emoji_id (aiogram 3.25.0+)
-- add aliases export/import
-- add folders
-- restrict inline queries for not allowed users
-- add new styles button in some cases
-- add some "icons" in buttons
-- remove utils.html_escape from eval
-- fix watcherbl
-- remove blacklist from ubguard.codrago.life
-- fix config mod args when args is wrong
-- add some translation providers to translator
-- fix: replace all no-break spaces with regular ones in Evaluator
-- add premium icon to /start and /profile
-- fix critical bug with inline
-- fix: update hashable_entity check to handle negative channel ID's
-- add bot command adding
-- improve error handling and add debug logging for bot command settings 
-- remove watchdog func from tester
-- remove info in photo switch
-- remove show_heroku from info
-- improve presets button translations
-- fix restore button invoke
-- improve logging logic
+# Hikka Changelog
 
-## 🪐 Heroku 1.7.2
-- added autoupdate
-- updated heroku-tl to 1.7.2
-- fix folder bug
-- fix request_join in quickstart
-- improve request_join logic
-- fixed hikkalls
-- added multiunload 
-- fixed command for anonimous user 
-- removed executor
-- added print output in eval
-- aliases with arguments (.addalias alias command args)
-- prefixes for owners
-- fix sudo mode 
-- removed aeza from info
-- fixed bug in help with quote
-- loging improvements
-- add invert_media in heroku-tl
-- fix zero CPU %
-- added config split
-- added command addacc for add account like a weburl without web
-- fixed sorting function in help
-- added initial web stop
-- fixed all bugs with tsec, sgroups and owners
-- fix loader inline_restart
-- added modules selection in presets
-- fix all updater cmds for lavhost
-- refactor close button
-- fix _mod_import_lib
-- added stop command
-- refactor utils.answer logic
-- added back button in many menus
-- update support command
-- added quote for list commands in help
-- fix banner in .presets command
+## 🌑 Grand finale
 
-## 🪐 Heroku 1.7.1
-- fixed bug with web 
-- fixed bug with executor
-- fixed bug with presets command
-- added structure for windows and MacOS
-- added blockquote for all lists
-- updated all banners and avatars
-- added ubguard.codrago.life
-- added /profile command in inline bot
-- added restart button on "requirements installed"
-- removed cloudflare from weburl
-- update dockerfile
-- update heroku-tl to 1.1.3
-- fixed error with "method not mounted"
-- added log "aiogram sleep" to ignore filter
+- Remove all code, that might (even on paper) be considered as a security risk.
+- Completely remove UnitHeta support, sideload it from the official repo if needed.
+- After this commit repo will be archived and all development will be stopped.
 
-## 🪐 Heroku 1.7.0
-
-- added banner to ping
-- added config for emoji in config (.cfg herokuconfig)
-- fixed close button in .update
-- added several variables to info ({os}, {kernel}, {cpu}, {ping})
-- added command to rollback updates
-- merged updater & update_notifier and translations
-- added command to change bot token (ch_bot_token)
-- added first official hosting (@jamhost, also @hikkahost)
-- fixed bug with reply in info
-- fixed bug with non-working .ping and .info on arch linux
-- updated .installation command
-- Telethon has been completely updated, moving to heroku-tl
-- update heroku-tl to 1.1.0
-- added prefix to ping
-- removed official support serv00, tothost, goorm, railway, termux
-- rename folder "hikka" to "heroku"
-- fix close btn
-- fix native imports
-- added converting Hikka backups to Heroku
-- updated to aiogram 3.20.0
-- fix some bugs with buttons in inline
-
-## 🪐 Heroku 1.6.8
-
-- Finally renamed to Heroku and new Emoji
-- many changes and improvements
-- many bugs fixed, work sped up
-- replacing UpgradedEval with Executor
-- added non-standard prefixes
-- All banners, chats and avatars have been replaced.
-- fixed bug with disabling debugger
-- removed the button with info (hotfix for a bug where it was reinstalled)
-- added config for emoji in aliases (.cfg settings)
-- added config for the first emoji to help (.cfg help)
-- minor bug fixes
-- new design in some built-in elements
-- fixed links in /presets, now modules are installed without problems
-- added several variables to info and ping ({hostname}, {user})
-- added .presets command
-- fixed bug with "bot.inline.send.message is never awaited"
-- added DJHost in info
-- added config for profile picture in info
-- added config for show "Heroku" in info
-- removed UnitHeta
-
-## 🌑 Heroku 1.6.7
-
-- new design
-- added changelog command
-- added presets command
-- better design in help
-- fix strings
-- removed command pbe
-  
-## 🌑 Heroku 1.6.6
-
-- add ToThost, oracle, AWS, aeza and serv00 detection
-- fixed some bugs
-- update telethon version to 1.37.0
-- removed all languages excluding: Russian, English, Ukrainian
-  
-## 🌑 Heroku 1.6.6 beta
-
-- formatting ruff
-- add webapp support in InlineKeyboardButton
-- add random version name
-- fix UnicodeDecodeError in windows
-- add a new language Ukrainian
-
-## 🌑 Heroku 1.6.5
-
-- fixed several links
-- improved desing
-- Update to Heroku-TL 2.0.8
-- other improvements and fixes...
- 
-## 🌑 Heroku 1.6.4
-
-- Completely remove Dragon support as redundant
-- Fix request_join error
-- Decrease module info length in heta
-- Add privacy switch to `UnitHeta`
-- Add HikkaHost as a platform
-- Update to Hikka-TL 2.0.7
-- Allow double-restart
-- Personal messages scam modules protection
-- https://github.com/coddrago/Heroku/issues/115
-- https://github.com/coddrago/Heroku/issues/114
-- https://github.com/coddrago/Heroku/issues/119
-- https://github.com/coddrago/Heroku/issues/120
-- Other changes
-
-## 🌑 Heroku 1.6.3
+## 🌑 Hikka 1.6.3
 
 - Add argument `item_type` to `db.pointer` to provide interface for NamedTuple objects
 - Add correct exception propagation to inline units
@@ -279,7 +24,7 @@
 - Migrate inline heta search to userbot instead of centralized service
 - Cosmetical changes
 
-## 🌑 Heroku 1.6.2
+## 🌑 Hikka 1.6.2
 
 - Fix security issue with edited channel messages
 - Add interface to interact with raw pointer data (`.data` attribute)
@@ -312,7 +57,7 @@
 - Transfer all previously non-essential modules to core ones
 - Add alternative translation mechanism using YAML
 
-## 🌑 Heroku 1.6.1
+## 🌑 Hikka 1.6.1
 
 - Remove miyahost from official hosts
 - Fix memory leak when using 1.6.0 inside Docker
@@ -320,7 +65,7 @@
 - Root out stats mechanism
 - Add French translation pack
 
-## 🌑 Heroku 1.6.0
+## 🌑 Hikka 1.6.0
 
 - Bring support for Dragon Userbot modules
 - Make `db` attribute of `Modules` public
@@ -333,7 +78,7 @@
 - Fix command escaping when using layout translated prefix
 - Patch `.info`, `utils.answer` etc to support forums (topics)
 - Drop Okteto support
-- Show Heroku platform and version in Telegram sessions list
+- Show Hikka platform and version in Telegram sessions list
 - New type `DragonModule`
 - New argument of `get_prefix` - `userbot`. Pass in `"dragon"` to get its prefix
 - New attribute of `Modules` - `dragon_modules`
@@ -371,17 +116,17 @@
 - EULA warning for lavHost and MiyaHost
 - Support for Python 3.10
 
-## 🌑 Heroku 1.5.3
+## 🌑 Hikka 1.5.3
 
 - Add Uzbek, Turkish, German and Spanish translation packs
 - Fix module and command docs not being translated on-the-flight
 - Fix `RegExp` validator
 
-## 🌑 Heroku 1.5.2
+## 🌑 Hikka 1.5.2
 
 - Change the behavior of `@loader.raw_handler` decorator to accept starred arguments instead of list-like value
 
-## 🌑 Heroku 1.5.1
+## 🌑 Hikka 1.5.1
 
 - Fix `--no-web` arg
 - Fix `tglog_level` config option of module `Tester`
@@ -395,7 +140,7 @@
 - Add `invite_bot` parameter to `utils.asset_channel`
 - Add support for `String` validator's `min_len` and `max_len` parameters
 
-## 🌑 Heroku 1.5.0
+## 🌑 Hikka 1.5.0
 
 - Fix `on_change` param processing in config
 - Fix `hikka.types.CoreOverwriteError`
@@ -446,11 +191,11 @@
 - Remove FTG License in fully changed files
 - Add official GoormIDE support
 
-## 🌑 Heroku 1.4.2
+## 🌑 Hikka 1.4.2
 
 - Fix authorization error
 
-## 🌑 Heroku 1.4.1
+## 🌑 Hikka 1.4.1
 
 - Create new type :obj:`hikka.tl_cache.CustomTelegramClient` to avoid monkeypatching
 - Add `ttl` param for :method:`hikka.utils.asset_channel`
@@ -458,17 +203,17 @@
 - Fix automatic modules reactions
 - Fix :method:`hikka.inline.utils.Utils._find_caller_sec_map`
 - Fix the targeted security rules without time limit
-- Require Heroku-TL >= 1.24.9
+- Require Hikka-TL >= 1.24.9
 - Refactor `document_id` of custom emojis
 - Refactor validators to be classes, not functions
 - Refactor typehints
 
-## 🌑 Heroku 1.4.0
+## 🌑 Hikka 1.4.0
 
 - Publish hikka telethon fork and migrate to it in requirements, thereby fixing the deployment error on Heroku
 - Add custom emojis filter to `utils.remove_html`
 - Fix `client.get_perms_cached`
-- Fix translation flaw in `HerokuSecurity`
+- Fix translation flaw in `HikkaSecurity`
 - Fix `.uninstall_hikka` being accessible by sudo
 - Fix `utils.find_caller` for :method:`hikka.inline.utils.Utils._find_caller_sec_map`
 - Fix `.eval`
@@ -478,7 +223,7 @@
 - Add targeted security for users and chats (`.tsec`)
 - Add support for `tg_level` in `.config Tester`
 - Add `-f` param to `.restart` and `.update`
-- Add platform-specific Heroku emojis to premium users
+- Add platform-specific Hikka emojis to premium users
 - Add codepaces to `utils.get_named_platform`
 - Add `Presets` core module
 - Add handler for `/start` command in inlinebot with userbot info
@@ -487,18 +232,18 @@
 - Internal refactoring and typehints
 - Remove custom :obj:`BotInlineMessage` hook for :method:`answer`
 
-## 🌑 Heroku 1.3.3
+## 🌑 Hikka 1.3.3
 
 - Fix typo, which broke `client.get_fulluser`
 
-## 🌑 Heroku 1.3.2
+## 🌑 Hikka 1.3.2
 
 - Add `on_change` param to `loader.ConfigValue`
 - Rework commands\inline handlers\callback handlers\watchers registration and unload process
 - Rework tags processing
 - Add junk collector aka reloader to `Modules`
 
-## 🌑 Heroku 1.3.1
+## 🌑 Hikka 1.3.1
 
 - Add caching to `utils.asset_channel`
 - Add `channel` param to `utils.asset_channel` to actually create a channel, not supergroup
@@ -534,7 +279,7 @@
 - Add animated emojis to core modules strings
 - Add trigger to toggle the appearence of custom emojis
 
-## 🌑 Heroku 1.3.0
+## 🌑 Hikka 1.3.0
 
 - Patch stats so they correctly recognize links
 - Fix bug when `...` is being replaced with `..` (unnecessary prefix escape)
@@ -565,7 +310,7 @@
 - Replace `print` with `logging.info` in main script to make url visible in logs
 - Automatically react to module post in developer's channel if possible
 
-## 🌑 Heroku 1.2.12
+## 🌑 Hikka 1.2.12
 
 - Automatically patch reply markup in inline form in the way, that edit stays available anyway
 - Do not unload inline form automatically, keep it for 10 minutes instead
@@ -573,7 +318,7 @@
 - Add `self.request_join`
 - Allow developers to declare `client_ready` without arguments
 
-## 🌑 Heroku 1.2.11
+## 🌑 Hikka 1.2.11
 
 - Add support for lib attribute `version` (must be defined BEFORE `init` method)
 - Add `self.lookup` to libs
@@ -589,8 +334,8 @@
 - Reformat code with `black --preview`
 - Automatically send photo as gif if possible in form
 - Update quickstart
-- New fields in HerokuInfo
-- Remove suffix `Heroku` if user specified it somewhere below
+- New fields in HikkaInfo
+- Remove suffix `Hikka` if user specified it somewhere below
 - New exception handler
 - Fix back button in `.config <lib>`
 - New `.e` error format
@@ -598,7 +343,7 @@
 - Fix unload error in module without commands
 - Rework aiogram media processing on edit
 
-## 🌑 Heroku 1.2.10
+## 🌑 Hikka 1.2.10
 
 - Completely drop fast_uploader support
 - Add :method:`utils.import_lib`
@@ -610,11 +355,11 @@
 - Add migration native modules db storage from `strings["name"]` to classname. ⚠️ Might break some stuff in the beginning in rare cases
 - Fix heroku-specific config error
 
-## 🌑 Heroku 1.2.9
+## 🌑 Hikka 1.2.9
 
 - Small patch which allows developer to specify audio metadata in form and `_edit_unit`
 
-## 🌑 Heroku 1.2.8
+## 🌑 Hikka 1.2.8
 
 - Add automatic webpage bot unblock in heroku waker
 - Add secure boot feature
@@ -629,7 +374,7 @@
 - Deepsource fixes
 - Multiple languages with priority
 
-## 🌑 Heroku 1.2.7
+## 🌑 Hikka 1.2.7
 
 - Add automatic proxy pass
 - Fix --no-web argument parsing
@@ -651,33 +396,33 @@
 - Properly remove items from series options through built-in configurator
 - Remove warning from web by replacing coroutine generation with `functools.partial`
 
-## 🌑 Heroku 1.2.6
+## 🌑 Hikka 1.2.6
 
 - Fix processing of `# scope: hikka_min`
 - Add `forbid_joins.py` (to use it, download module from official repo with the same name)
 
-## 🌑 Heroku 1.2.5
+## 🌑 Hikka 1.2.5
 
 - Add additional exit on restart to avoid port block
 - Add unloaded module name on `.unloadmod`
-- Add `banner_url` config var to `HerokuInfo`
+- Add `banner_url` config var to `HikkaInfo`
 - Add `loader.validators.Hidden`
 - Add `websockets` dependency, so users can load hikarichat on Heroku
 - Add `reply_markup` kwarg to `utils.answer`. This will automatically add buttons to plain message or edit buttons of inline unit
 - Add suggestion to join developer's channel on module load if available
-- Add `client.force_get_entity` to bypass Heroku Cacher
+- Add `client.force_get_entity` to bypass Hikka Cacher
 - Add clickable link to loaded module message if specified meta developer is channel
 - Add support of `action` attributes for buttons ("action": "close", "action": "unload", "action": "answer")
 - Add log splitter between different clients of instance (if possible)
 - Fix inline events `IndexError`
 - Fix text in inline input
-- Fix translation issue in HerokuConfig
+- Fix translation issue in HikkaConfig
 - Fix `.dump`
 - Fix modules list reset if you perform `.dlmod` when userbot is not yet fully loaded
 - Update links in README
 - Remove nalinor from official repos until new modules appear
 
-## 🌑 Heroku 1.2.4
+## 🌑 Hikka 1.2.4
 
 - Show current options in module config
 - Add new validators: `loader.validators.Union`, `loader.validators.NoneType`
@@ -692,11 +437,11 @@
 - Remove psycopg2 from requirements.txt
 - New installation banner
 - Add automatic blob->raw convertion in loader
-- Add banner with Heroku installation status
+- Add banner with Hikka installation status
 - Reorder config saving in web
 - Fix `Unauthorized` error on Heroku
 
-## 🌑 Heroku 1.2.3
+## 🌑 Hikka 1.2.3
 
 - Add field `action` to inline buttons. You can pass there `close` to close inline form, `unload` to unload it from memory, `answer` & `text` | `show_alert` to answer callback query with message
 - Update docstrings in inline to match unified format
@@ -705,7 +450,7 @@
 - Return :obj:`InlineMessage` in `hikka.inline.gallery.Gallery.gallery`
 - Fix typo in docstring
 
-## 🌑 Heroku 1.2.2
+## 🌑 Hikka 1.2.2
 
 - Update gitignore so git doesn't count shit on heroku
 - Visual heroku fixes in updater
@@ -721,7 +466,7 @@
 - More meaningful errors in `self.inline.form`, `self.inline.gallery`, `self.inline.list` on user-side
 - Allow editing\adding media to form via `call.edit`. Currently supported: `photo`, `file`, `video`, `audio`, `gif`
 
-## 🌑 Heroku 1.2.1
+## 🌑 Hikka 1.2.1
 
 - Add termux specific requirements
 - Refactor `heroku.py` app searching algorithm
@@ -730,7 +475,7 @@
 - Add heroku waker
 - Make `hikka-` app naming optional
 
-## 🌑 Heroku 1.2.0
+## 🌑 Hikka 1.2.0
 
 - Add full-featured Heroku support with additional buildpacks
 - Notify which dependencies are being installed in .dlmod
@@ -745,7 +490,7 @@
 - Add `ast.literal_eval` to config
 - Add explicit typecheck for `mod.config`
 
-## 🌑 Heroku 1.1.28
+## 🌑 Hikka 1.1.28
 
 - Fix non-working param `share_link` in loader
 - Assure logging bot is a member of logchat
@@ -761,7 +506,7 @@
 - Add `add` and `remove` buttons to `Series` params
 - Do not unload form immediately, if `ttl` param was passed explicitly
 
-## 🌑 Heroku 1.1.27
+## 🌑 Hikka 1.1.27
 
 - Reorder the steps of parsing in `loader.validators.Series`
 - Fix aliases (yet another time)
@@ -782,7 +527,7 @@
 - Add changelog
 - Remove redundant code in `database.py` as it literally does nothing
 
-## 🌑 Heroku 1.1.26
+## 🌑 Hikka 1.1.26
 
 - Hopefully finally fix aliases being reset after restart
 - Remove redundant internal hook \_client_ready2
@@ -790,7 +535,7 @@
 - Add validator for each item to Series, remove separator
 - Add new validator: TelegramID
 
-## 🌑 Heroku 1.1.25
+## 🌑 Hikka 1.1.25
 
 - Add separate messages on restart and full_restart. Second one is shown, when all modules are loaded
 - Replace .uninstall_hikka with full uninstallation (remove bot, asset chats and folder)
@@ -801,13 +546,13 @@
 - Update semantic generator in validators
 - Yet another protection from monkey-patching
 
-## 🌑 Heroku 1.1.24
+## 🌑 Hikka 1.1.24
 
 - Add String and Link validators
 - Fix Series validator
 - Reformat core modules to use validators
 
-## 🌑 Heroku 1.1.23
+## 🌑 Hikka 1.1.23
 
 - Add config validators (loader.validators, Boolean, Integer, Choice, Series)
 - Change info layout
@@ -817,7 +562,7 @@
 - Fix minor bugs
 - Fix aliases being reset after restart (aliases will now be available only when userbot is fully loaded)
 
-## 🌑 Heroku 1.1.22
+## 🌑 Hikka 1.1.22
 
 - Fix bugs related to web, more specifically: Session save timing, adding more than 1 account and proper restart
 - Rework Dockerfiles so they work properly
@@ -828,13 +573,13 @@
 - Typehints update
 - Fix Okteto pinger messages removal
 
-## 🌑 Heroku 1.1.21
+## 🌑 Hikka 1.1.21
 
 - Fix translation typos
 - Add nonick suggestion when adding user to group
 - Add entity caching
 
-## 🌑 Heroku 1.1.20
+## 🌑 Hikka 1.1.20
 
 - Add legacy fs modules migration
 - Add ready asyncio Event to help track userbot loading process from outside
@@ -844,27 +589,27 @@
 - HTML-escape # meta developer:
 - Make self.animate available for core modules and modules, loaded from file
 
-## 🌑 Heroku 1.1.19
+## 🌑 Hikka 1.1.19
 
 - Fix infinite loops
 - Add client-specific check of fs modules
 - Use classname of module, if it is possible to parse it with ast
 - Rework infinite loops stopping and modules instance placement
 
-## 🌑 Heroku 1.1.18
+## 🌑 Hikka 1.1.18
 
 - Add notification about not exact match in help
 - Add automatic progress bar generation to self.fast_upload and self.fast_download
 - Make Mod ending in modules class name not mandatory
 
-## 🌑 Heroku 1.1.17
+## 🌑 Hikka 1.1.17
 
 - Fix some weird looking code
 - Fix some emojies and translation issues
 - Add native lavHost support (.restart, .update) via internal API
 - Add utils.get_lang_flag()
 
-## 🌑 Heroku 1.1.16
+## 🌑 Hikka 1.1.16
 
 - Fix config docstrings and html escaping
 - Fix typehints
@@ -876,7 +621,7 @@
 - Add default aiogram parse mode
 - Rename some core stuff which was not supposed to be used by external developers
 
-## 🌑 Heroku 1.1.15
+## 🌑 Hikka 1.1.15
 
 - Add automatic database autofix and rollback if database was broken by module
 - Fix translation issues
@@ -885,7 +630,7 @@
 - Fix modules which are deleting from helphide
 - Automatically save db if it was edited via classic dictionary methods
 
-## 🌑 Heroku 1.1.14
+## 🌑 Hikka 1.1.14
 
 - Fix utils.asset_channel()'s archive param
 - Fix defect, which forced installation from additional trusted repo, rather than from primary one if the file names are matched
@@ -901,7 +646,7 @@
 - Add utils.is_serializable(), utils.set_avatar()
 - Send very large (over 4096\*10 symbols) output in a file rather than in an inline list
 
-## 🌑 Heroku 1.1.13
+## 🌑 Hikka 1.1.13
 
 - Fix processing commands on behalf of channel
 - Fix .settings Restart and Update
@@ -911,26 +656,26 @@
 - Properly censor known tokens in logs
 - Replace regex check in utils.check_url() with urllib parser
 
-## 🌑 Heroku 1.1.12
+## 🌑 Hikka 1.1.12
 
 - Consider avoiding redundant requests to TG API in order to get the client id and rather using self.\_tg_id, which is now available for all modules
 
-## 🌑 Heroku 1.1.11
+## 🌑 Hikka 1.1.11
 
 - Add fast uploader (self.fast_upload, self.fast_download)
 - Fix translations
 
-## 🌑 Heroku 1.1.10
+## 🌑 Hikka 1.1.10
 
 - Add ability to download modules from many additional repos (e.g. you can download weather by morisummer via just .dlmod weather, and also list all available repos via .dlmod)
 
-## 🌑 Heroku 1.1.9
+## 🌑 Hikka 1.1.9
 
 - Fix \_generate_markup in order that it automatically sets up callback hooks to \_custom_map if callback was passed in buttons
 - Add switch_inline_query and switch_inline_query_current_chat parsers
 - Fix minor issues
 
-## 🌑 Heroku 1.1.8
+## 🌑 Hikka 1.1.8
 
 - Stuff, related to translation issues
 - Add self.get_prefix() to all modules, which returns current command prefix
@@ -940,49 +685,49 @@
 - Add trusted developers to quickstart message
 - Automatically switch language via quickstart message button
 
-## 🌑 Heroku 1.1.7
+## 🌑 Hikka 1.1.7
 
 - Add self.animate function to all modules, which allows you to easily create fancy animations
 
-## 🌑 Heroku 1.1.6
+## 🌑 Hikka 1.1.6
 
 - Allow and process callback field in result of inline query answer. You can also use this in your own functions. Simply pass prepare_callbacks=True to \_generate_markup
 - Generate InlineCall object on \_custom_map handlers
 
-## 🌑 Heroku 1.1.5
+## 🌑 Hikka 1.1.5
 
 - Minor update: Allow passing disable_security and always_allow to buttons directly
 
-## 🌑 Heroku 1.1.4
+## 🌑 Hikka 1.1.4
 
 - Ability to set inline bot username on setup (in web interface)
 - Fix inline help
 - Add more debug info to logs
 - Add attribute status to loops
-- Fix HerokuDL link parsing
+- Fix HikkaDL link parsing
 - Suggest enabling value in bounding mask if it is not
 - Mask tokens in logs
 - Add utils.get_git_hash()
 - Add debugging mode for developers
 
-## 🌑 Heroku 1.1.3
+## 🌑 Hikka 1.1.3
 
 - Finally (hopefully) fix config
 - Minor bug fixes related to inline form processing
 
-## 🌑 Heroku 1.1.2
+## 🌑 Hikka 1.1.2
 
 - Add @loader.loop, which provides developers access to easy-to-make infinite loops. Wait for developers docs to update for more info
 
-## 🌑 Heroku 1.1.1
+## 🌑 Hikka 1.1.1
 
-- Drop Uniborg and Raphielgang compatibility layer. More info in [2d525ab](https://github.com/hikariatama/Heroku/commit/2d525ab6b0e6b9d7ccd7408bbe175cea24d780a5)
+- Drop Uniborg and Raphielgang compatibility layer. More info in [2d525ab](https://github.com/hikariatama/Hikka/commit/2d525ab6b0e6b9d7ccd7408bbe175cea24d780a5)
 - Minor bug fixes
 
-## 🌑 Heroku 1.1.0
+## 🌑 Hikka 1.1.0
 
 - Make inline commands' docstrings translatable
-- Introducing HerokuDynamicTranslate - the possibility for developers to translate their own modules to other language without usage of native translates
+- Introducing HikkaDynamicTranslate - the possibility for developers to translate their own modules to other language without usage of native translates
 - Rework translates system, because «translate channels wut¿». Now translate pack can be loaded from disk or from web
 - Add utils.check_url
 - Get rid of babel
@@ -1000,151 +745,151 @@
 - Rework slideshow so it runs in the background
 - Fix here, fix there, fix somewhere...
 
-## 🌑 Heroku 1.0.29
+## 🌑 Hikka 1.0.29
 
 - Add option to control inline and callback handlers' security via loader decorators, including brand new @loader.inline_everyone
-- Refactor HerokuSecurity, especially the bounding mask control
+- Refactor HikkaSecurity, especially the bounding mask control
 
-## 🌑 Heroku 1.0.28
+## 🌑 Hikka 1.0.28
 
 - Add silent param to inline.form, inline.gallery, inline.list
 - Add photo param to inline.form
 - Add URL validator to inline.\_generate_markup
 - Ignore MessageIdInvalidError in .e
 
-## 🌑 Heroku 1.0.27
+## 🌑 Hikka 1.0.27
 
 Thankfully to @bsolute, now we have a cool smart_split in utils. The messages are split without loosing formatting and emojies, preferably on line breakes / spaces.
 
-## 🌑 Heroku 1.0.26
+## 🌑 Hikka 1.0.26
 
 - Add utils.smart_split which splits message in chunks of chunk_size, keeping parse_mode and entities in a right way (relocates 'em)
 - If response of utils.answer is too big to be sent in one particular message, it will be split in chunks of 4096 and sent via inline.list
 
-## 🌑 Heroku 1.0.25
+## 🌑 Hikka 1.0.25
 
 - Add disable_security to inline forms, lists and galleries
 
-## 🌑 Heroku 1.0.24
+## 🌑 Hikka 1.0.24
 
 - Okteto fixes (persistent uri, fix webpage)
 - Add utils.dnd, which allows to mute and archive peer
 - Security fixes for groups (not super\mega groups)
 - Minor bug fixes
 
-## 🌑 Heroku 1.0.23
+## 🌑 Hikka 1.0.23
 
-- Add ability to disable HerokuDL natively
+- Add ability to disable HikkaDL natively
 - Fix Updater so it works if you have troubles with inline mode
 
-## 🌑 Heroku 1.0.22
+## 🌑 Hikka 1.0.22
 
-Add HerokuDL module to use inline download buttons in verified channels
+Add HikkaDL module to use inline download buttons in verified channels
 
-## 🌑 Heroku 1.0.21
+## 🌑 Hikka 1.0.21
 
 A lot of stuff: web fixes, bug fixes, automatic seamless userbot restart when adding new account in web, replace emojies, add inline list feature, fix types name conflict and I don't remember other fixes, read code
 
-## 🌑 Heroku 1.0.20
+## 🌑 Hikka 1.0.20
 
 - Allow passing reply_markup field to InlineQuery's result
 - Refactor reply markup parser so it accepts more formats of inline markup
 
-## 🌑 Heroku 1.0.19
+## 🌑 Hikka 1.0.19
 
 - Allow developers to pass InlineQuery result via return operator in inline handlers. Read the docs for more info
 - Move query_gallery to a separate module
 
-## 🌑 Heroku 1.0.18
+## 🌑 Hikka 1.0.18
 
 - Add silent and archive params to utils.asset_channel.
 - Remake logging so it become native with `BotLogger`.
 - Inject `BotLogger` analog directly
 
-## 🌑 Heroku 1.0.17
+## 🌑 Hikka 1.0.17
 
 - Add ability to set up inline commands' security map (only `owner`, `sudo`, `support` and `everyone`, because other permissions are inaccessible when processing inline query).
 - Add database serializeability check to avoid JSON-serialization problems if unserializable object is being stored in db.
 - Minor bugfixes
 
-## 🌑 Heroku 1.0.16
+## 🌑 Hikka 1.0.16
 
 - Full support of Okteto cloud deployment inculding persistent data storage (additional volume is created)
 - Fix automatic waker for container
 
-## 🌑 Heroku 1.0.15
+## 🌑 Hikka 1.0.15
 
 - Add more errors to query aka query.e500()
 
-## 🌑 Heroku 1.0.14
+## 🌑 Hikka 1.0.14
 
 - Add gallery slideshow
 
-## 🌑 Heroku 1.0.13
+## 🌑 Hikka 1.0.13
 
 - Include command prefix in inline info.
 - Fix --no-web.
 - Suggest to save modules to filesystem
 
-## 🌑 Heroku 1.0.12
+## 🌑 Hikka 1.0.12
 
 - Optimize forms, galleries and custom_map storage by ommiting keys with default values and dynamically generate them.
 - Add feature to inherit command-caller permissions on form and gallery (crutchy).
 - Minor improvements and bug fixes
 
-## 🌑 Heroku 1.0.11
+## 🌑 Hikka 1.0.11
 
 - Add inline.query_gallery to add ability to call inline gallery via inline query.
 - Add `e404` attribute to `InlineQuery`, which should be shown, that no results were found
 
-## 🌑 Heroku 1.0.10
+## 🌑 Hikka 1.0.10
 
 - Add feature to send gifs in inline galleries (gif param).
 - Make argument `caption` of inline gallery not mandatory
 
-## 🌑 Heroku 1.0.9
+## 🌑 Hikka 1.0.9
 
 - Full inline structure rework.
 - Split this madness into separate modules (`InlineUnit`s), which extend the main unit - `InlineManager`.
 - Compatibility layer is not main priority.
 
-## 🌑 Heroku 1.0.8
+## 🌑 Hikka 1.0.8
 
 - Code refactoring
 - Minor bug fixes
 - Rewrite security
 
-## 🌑 Heroku 1.0.7
+## 🌑 Hikka 1.0.7
 
 - Massive inline galleries update, memoization, back button, preloading and other features.
 - Fix some minor bugs, add `ascii_face` to utils
 
-## 🌑 Heroku 1.0.6
+## 🌑 Hikka 1.0.6
 
 - Add welcome message, triggered when userbot is installed
 
-## 🌑 Heroku 1.0.5
+## 🌑 Hikka 1.0.5
 
 - Add gallery memoization (ability to close gallery and scroll it back)
 
-## 🌑 Heroku 1.0.4
+## 🌑 Hikka 1.0.4
 
 - Add Okteto pinger, which will wake the pod up, when it goes to sleep
 
-## 🌑 Heroku 1.0.3
+## 🌑 Hikka 1.0.3
 
 - Fix a lot of stuff in web
 - Add new features to web
 - Merge root and initial_root
 - Remove trailing whitespaces
 
-## 🌑 Heroku 1.0.2
+## 🌑 Hikka 1.0.2
 
 - Full restructure of core code
 - Refactor web
 - Create new active bg
 
-## 🌑 Heroku 1.0.1
+## 🌑 Hikka 1.0.1
 
 - Drop heroku support
 - Remove redundant code

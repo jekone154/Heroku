@@ -1,127 +1,160 @@
 #!/bin/bash
-set -e
 
-# === Проверка поддержки терминала ===
-if [ -z "$TERM" ] || [ "$TERM" = "dumb" ]; then
-    echo "Your terminal does not support color formatting. Using basic mode."
-    BLUE=""
-    CYAN=""
-    GREEN=""
-    RED=""
-    YELLOW=""
-    PURPLE=""
-    RESET=""
-    BOLD=""
-else
-    BLUE="\033[34m"
-    CYAN="\033[36m"
-    GREEN="\033[32m"
-    RED="\033[31m"
-    YELLOW="\033[33m"
-    PURPLE="\033[35m"
-    RESET="\033[0m"
-    BOLD="\033[1m"
+
+runin() {
+	# Runs the arguments, piping stderr to logfile
+	{ "$@" 2>>../hikka-install.log || return $?; } | while read -r line; do
+		printf "%s\n" "$line" >>../hikka-install.log
+	done
+}
+
+runout() {
+	# Runs the arguments, piping stderr to logfile
+	{ "$@" 2>>hikka-install.log || return $?; } | while read -r line; do
+		printf "%s\n" "$line" >>hikka-install.log
+	done
+}
+
+errorin() {
+	cat ../hikka-install.log
+}
+errorout() {
+	cat hikka-install.log
+}
+
+SUDO_CMD=""
+if [ ! x"$SUDO_USER" = x"" ]; then
+	if command -v sudo >/dev/null; then
+		SUDO_CMD="sudo -u $SUDO_USER "
+	fi
 fi
 
-center_title() {
-    local title="$1"
-    local title_length=${#title}
-    local width=$(tput cols 2>/dev/null || echo 50)
-    [ $width -lt $((title_length + 4)) ] && width=$((title_length + 4))
-    local padding=$(( (width - title_length) / 2 ))
-    local left_padding=$(printf "%${padding}s" | tr ' ' '-')
-    local right_padding=$(printf "%${padding}s" | tr ' ' '-')
-    [ $(( (width - title_length) % 2 )) -ne 0 ] && right_padding="${right_padding}-"
-    echo "${left_padding}${title}${right_padding}"
+##############################################################################
+
+clear
+clear
+
+printf "\n\e[1;35;47m                   \e[0m"
+printf "\n\e[1;35;47m █ █ █ █▄▀ █▄▀ ▄▀█ \e[0m"
+printf "\n\e[1;35;47m █▀█ █ █ █ █ █ █▀█ \e[0m"
+printf "\n\e[1;35;47m                   \e[0m"
+printf "\n\n\e[3;34;40m Installing...\e[0m\n\n"
+
+##############################################################################
+
+printf "\r\033[0;34mPreparing for installation...\e[0m"
+
+touch hikka-install.log
+if [ ! x"$SUDO_USER" = x"" ]; then
+	chown "$SUDO_USER:" hikka-install.log
+fi
+
+if [ -d "Hikka/hikka" ]; then
+	cd Hikka || {
+		printf "\rError: Install git package and re-run installer"
+		exit 6
+	}
+	DIR_CHANGED="yes"
+fi
+if [ -f ".setup_complete" ]; then
+	# If hikka is already installed by this script
+	PYVER=""
+	if echo "$OSTYPE" | grep -qE '^linux-gnu.*'; then
+		PYVER="3"
+	fi
+	printf "\rExisting installation detected"
+	clear
+	"python$PYVER" -m hikka "$@"
+	exit $?
+elif [ "$DIR_CHANGED" = "yes" ]; then
+	cd ..
+fi
+
+##############################################################################
+
+echo "Installing..." >hikka-install.log
+
+if echo "$OSTYPE" | grep -qE '^linux-gnu.*' && [ -f '/etc/debian_version' ]; then
+	PKGMGR="apt install -y"
+	runout dpkg --configure -a
+	runout apt update
+	PYVER="3"
+elif echo "$OSTYPE" | grep -qE '^linux-gnu.*' && [ -f '/etc/arch-release' ]; then
+	PKGMGR="pacman -Sy --noconfirm"
+	PYVER="3"
+elif echo "$OSTYPE" | grep -qE '^linux-android.*'; then
+	runout apt update
+	PKGMGR="apt install -y"
+	PYVER=""
+elif echo "$OSTYPE" | grep -qE '^darwin.*'; then
+	if ! command -v brew >/dev/null; then
+		ruby <(curl -fsSk https://raw.github.com/mxcl/homebrew/go)
+	fi
+	PKGMGR="brew install"
+	PYVER="3"
+else
+	printf "\r\033[1;31mUnrecognised OS.\e[0m Please follow 'Manual installation' at \033[0;94mhttps://github.com/hikariatama/Hikka/#-installation\e[0m"
+	exit 1
+fi
+
+##############################################################################
+
+runout "$SUDO_CMD $PKGMGR python$PYVER" git || {
+	errorout "Core install failed."
+	exit 2
 }
 
-spinner() {
-    local pid=$1
-    local delay=0.1
-    local spinstr='|/-\'
-    while [ "$(ps a | awk '{print $1}' | grep $pid)" ]; do
-        local temp=${spinstr#?}
-        printf " [%c]  " "$spinstr"
-        local spinstr=$temp${spinstr%"$temp"}
-        sleep $delay
-        printf "\b\b\b\b\b\b"
-    done
-    printf "    \b\b\b\b"
+
+printf "\r\033[K\033[0;32mPreparation complete!\e[0m"
+printf "\n\r\033[0;34mInstalling linux packages...\e[0m"
+
+if echo "$OSTYPE" | grep -qE '^linux-gnu.*'; then
+	runout "$SUDO_CMD $PKGMGR python$PYVER-dev"
+	runout "$SUDO_CMD $PKGMGR python$PYVER-pip"
+	runout "$SUDO_CMD $PKGMGR python3 python3-pip git python3-dev \
+		libwebp-dev libz-dev libjpeg-dev libopenjp2-7 libtiff5 \
+		ffmpeg imamgemagick libffi-dev libcairo2"
+elif echo "$OSTYPE" | grep -qE '^linux-android.*'; then
+	runout "$SUDO_CMD $PKGMGR openssl libjpeg-turbo libwebp libffi libcairo build-essential libxslt libiconv git ncurses-utils"
+elif echo "$OSTYPE" | grep -qE '^darwin.*'; then
+	runout "$SUDO_CMD$ $PKGMGR jpeg webp"
+fi
+
+printf "\r\033[K\033[0;32mPackages installed!\e[0m"
+printf "\n\r\033[0;34mCloning repo...\e[0m"
+
+
+##############################################################################
+
+# shellcheck disable=SC2086
+${SUDO_CMD}rm -rf Hikka
+# shellcheck disable=SC2086
+runout ${SUDO_CMD}git clone https://github.com/hikariatama/Hikka/ || {
+	errorout "Clone failed."
+	exit 3
+}
+cd Hikka || {
+	printf "\r\033[0;33mRun: \033[1;33mpkg install git\033[0;33m and restart installer"
+	exit 7
 }
 
-LOG_DIR="Heroku"
-LOG_FILE="$LOG_DIR/heroku_installer.log"
-apt install curl
-mkdir -p "$LOG_DIR"
+printf "\r\033[K\033[0;32mRepo cloned!\e[0m"
+printf "\n\r\033[0;34mInstalling python dependencies...\e[0m"
 
-while true; do
-    clear
-    echo -e "${PURPLE}${BOLD}"
-    curl -s https://raw.githubusercontent.com/coddrago/Heroku/refs/heads/dev-test/assets/download.txt   
-    echo -e "${RESET}"
-    echo -e "${CYAN}${BOLD}$(center_title 'Menu')${RESET}"
-    echo -e "${BLUE}1. Install Heroku${RESET}"
-    echo -e "${BLUE}2. Install Heroku in venv${RESET}"
-    echo -e "${BLUE}3. Install Heroku in Docker${RESET}"
-    echo -e "${BLUE}4. Remove Heroku${RESET}"
-    echo -e "${BLUE}0. Exit${RESET}"
-    echo -e "${CYAN}$(center_title '')${RESET}"
-    read -p $'\033[33m> \033[0m ' choice
+# shellcheck disable=SC2086
+runin "$SUDO_CMD python$PYVER" -m pip install --upgrade pip setuptools wheel --user
+# shellcheck disable=SC2086
+runin "$SUDO_CMD python$PYVER" -m pip install -r requirements.txt --upgrade --user --no-warn-script-location --disable-pip-version-check || {
+	errorin "Requirements failed!"
+	exit 4
+}
+rm -f ../hikka-install.log
+touch .setup_complete
 
-    case $choice in
-        1)
-            echo -e "${GREEN}Installing Heroku...${RESET}"
-            (apt-get update && apt-get install -y git python3 python3-pip) &>> "$LOG_FILE" & spinner $!
-            if [ -d "Heroku" ]; then
-                echo -e "${YELLOW}Heroku directory already exists. Skipping clone.${RESET}"
-            else
-                git clone https://github.com/coddrago/Heroku &>> "$LOG_FILE" & spinner $!
-            fi
-            cd Heroku
-            pip3 install -r requirements.txt &>> "$LOG_FILE" & spinner $!
-            python3 -m heroku &>> "$LOG_FILE" & spinner $!
-            echo -e "${GREEN}Completed successfully!${RESET}"
-            read -p $'\033[33mPress Enter to continue... \033[0m'
-            cd ..
-            ;;
-        2)
-            echo -e "${GREEN}Installing Heroku in venv...${RESET}"
-            (apt-get update && apt-get install -y git python3 python3-pip python3-venv) &>> "$LOG_FILE" & spinner $!
-            if [ -d "Heroku" ]; then
-                echo -e "${YELLOW}Heroku directory already exists. Skipping clone.${RESET}"
-            else
-                git clone https://github.com/coddrago/Heroku &>> "$LOG_FILE" & spinner $!
-            fi
-            cd Heroku
-            python3 -m venv Heroku_UB
-            source Heroku_UB/bin/activate
-            pip install -r requirements.txt &>> "$LOG_FILE" & spinner $!
-            python3 -m heroku &>> "$LOG_FILE" & spinner $!
-            echo -e "${GREEN}Completed successfully!${RESET}"
-            read -p $'\033[33mPress Enter to continue... \033[0m'
-            cd ..
-            ;;
-        3)
-            echo -e "${GREEN}Installing Heroku in Docker...${RESET}"
-            (apt-get update && apt-get install curl -y) &>> "$LOG_FILE" & spinner $!
-            bash <(curl -s https://raw.githubusercontent.com/coddrago/Heroku/refs/heads/master/docker.sh) &>> "$LOG_FILE" & spinner $!
-            echo -e "${GREEN}Completed successfully!${RESET}"
-            read -p $'\033[33mPress Enter to continue... \033[0m'
-            ;;
-        4)
-            echo -e "${RED}Removing Heroku...${RESET}"
-            rm -rf Heroku &>> "$LOG_FILE"
-            docker stop heroku_ub &>> "$LOG_FILE" || true
-            docker rm -f heroku_ub &>> "$LOG_FILE" || true
-            echo -e "${GREEN}Completed successfully!${RESET}"
-            read -p $'\033[33mPress Enter to continue... \033[0m'
-            ;;
-        0)
-            exit 0
-            ;;
-        *)
-            echo -e "${RED}Invalid choice!${RESET}"
-            read -p $'\033[33mPress Enter to continue... \033[0m'
-            ;;
-    esac
-done
+printf "\r\033[K\033[0;32mDependencies installed!\e[0m"
+printf "\n\033[0;32mStarting...\e[0m\n\n"
+
+${SUDO_CMD}"python$PYVER" -m hikka "$@" || {
+	printf "\033[1;31mPython scripts failed\e[0m"
+	exit 5
+}
